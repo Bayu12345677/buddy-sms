@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# yang tawu tawu aja
+# gua cuma butuh support kalian
+# bantu 1K subs channel youtube pejuang kentang
+
+lokasi=$(pwd)
+internet=$(
+	if (curl -sL google.com -o /dev/null); then
+		cat <<< "true"
+	else
+		cat <<< "false"
+	fi
+)
+
+args="$@"
+
+if ! grep -o "home" <<< "$lokasi" &>/dev/null; then
+	cat << EOF
+[+] lokasi file harus berada di directory home
+[+] tekan cd setelah itu install script ini dari awal
+EOF
+	exit
+fi
+
+case $args in
+			run) ./spm ;;
+			build) {
+				# rubbish
+				exec 7<>/dev/null
+
+				{
+					if $internet; then
+						depencies=("clang" "cmake" "make" "ossp-uuid" "vim")
+
+						for install_dpb in "${depencies[@]}"
+							do
+								apt-get install "$install_dpb" -y
+							done
+					else cat <<< "[+] Mohon periksa Internet Anda"; exit
+					fi
+				}
+
+				cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=gcc;cmake --build .
+			} ;;
+			delete) { rm -rf rm -rf Makefile cmake_install.cmake CMakeCache.txt CMakeFiles spm; } ;;
+			*) cat <<< "Opsi: build, delete and run" ;;
+esac
