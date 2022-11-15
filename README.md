@@ -23,5 +23,4 @@ cd buddy-sms
 bash build.shell build
 bash build.shell run
 ```
-
-- ambil token [di sini](https://carapedi.id/NngHUvf)
+- ambil token [di sini](https://karyawan.co.id/NngHUvf)
